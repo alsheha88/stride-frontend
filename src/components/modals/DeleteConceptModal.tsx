@@ -63,7 +63,7 @@ function DeleteConceptModal({
 						type="button"
 						onClick={handleDelete}
 						disabled={isPending}>
-						{isPending ? <ThreeDots color="#fffffe" /> : "Delete Concept"}
+						{isPending ? <ThreeDots color="#fffffe" width={16} height={16} /> : "Delete Concept"}
 					</Button>
 				</div>
 			</div>

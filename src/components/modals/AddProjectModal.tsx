@@ -90,7 +90,7 @@ function AddProjectModal({ isOpen, onClose }: AddProjectModalProps) {
 						Cancel
 					</Button>
 					<Button variant="primary" type="submit" disabled={isPending}>
-						{isPending ? <ThreeDots color="#0f0e17" /> : "Add Project"}
+						{isPending ? <ThreeDots color="#0f0e17" width={16} height={16} /> : "Add Project"}
 					</Button>
 				</div>
 			</form>

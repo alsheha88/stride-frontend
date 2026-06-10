@@ -83,7 +83,7 @@ function EditConceptModal({
 						Cancel
 					</Button>
 					<Button variant="primary" type="submit" disabled={isPending}>
-						{isPending ? <ThreeDots color="#0f0e17" /> : "Edit Concept"}
+						{isPending ? <ThreeDots color="#0f0e17" width={16} height={16} /> : "Edit Concept"}
 						
 					</Button>
 				</div>

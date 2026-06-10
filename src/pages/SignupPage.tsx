@@ -82,7 +82,7 @@ const SignupPage = () => {
 					</div>
 
 					<Button variant="primary" type="submit" disabled={isPending}>
-						{isPending ? <ThreeDots color="#0f0e17" /> : "Sign Up"}
+						{isPending ? <ThreeDots color="#0f0e17" width={16} height={16} /> : "Sign Up"}
 					</Button>
 
 					<p className="text-paragraph text-sm md:text-base text-center flex justify-center items-center gap-2.5">

@@ -63,7 +63,7 @@ function DeleteProjectModal({
 						type="button"
 						onClick={handleDelete}
 						disabled={isPending}>
-						{isPending ? <ThreeDots color="#fffffe" /> : "Edit Project"}
+						{isPending ? <ThreeDots color="#fffffe" width={16} height={16} /> : "Edit Project"}
 					</Button>
 				</div>
 			</div>

@@ -140,7 +140,7 @@ const AddConceptModal = ({ isOpen, onClose }: ModalProps) => {
 						Cancel
 					</Button>
 					<Button variant="primary" type="submit" disabled={isPending}>
-						{isPending ? <ThreeDots color="#0f0e17" /> : "Add Concept"}
+						{isPending ? <ThreeDots color="#0f0e17" width={16} height={16} /> : "Add Concept"}
 					</Button>
 				</div>
 			</form>

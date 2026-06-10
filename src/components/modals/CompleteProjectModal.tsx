@@ -166,7 +166,7 @@ function CompleteProjectModal({
 							Cancel
 						</Button>
 						<Button variant="primary" type="submit" disabled={isPending}>
-							{isPending ? <ThreeDots color="#0f0e17" /> : "Mark as completed"}
+							{isPending ? <ThreeDots color="#0f0e17" width={16} height={16} /> : "Mark as completed"}
 						</Button>
 					</div>
 				</div>

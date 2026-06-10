@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useGetConcepts } from "../hooks/concepts/useConcepts";
 import type { CreateProjectData } from "../schemas/projectsSchema";
+import Button from "./subcomponents/Button";
 
 const tierColors = [
   { dot: "bg-danger", border: "border-danger", rating: "Beginner" },
@@ -26,11 +27,13 @@ const ConceptPicker = ({ value, onChange }: ConceptPickerProps) => {
     .filter((link) => link.type === "existing")
     .map((link) => link.conceptId);
 
-  const filteredConcepts = concepts.filter(
-    (c) =>
-      !alreadyPickedIds.includes(c.id) &&
-      c.name.toLowerCase().includes(searchText.toLowerCase()),
-  );
+  const filteredConcepts = concepts
+    .filter(
+      (c) =>
+        !alreadyPickedIds.includes(c.id) &&
+        c.name.toLowerCase().includes(searchText.toLowerCase()),
+    )
+    .slice(0, 4);
 
   const exactMatch = concepts.some(
     (c) => c.name.toLowerCase() === searchText.toLowerCase(),
@@ -69,11 +72,13 @@ const ConceptPicker = ({ value, onChange }: ConceptPickerProps) => {
             return (
               <div
                 key={i}
-                className="bg-primary flex items-center gap-1 px-3 py-1 bg-surface-hover rounded-full"
+                className="bg-primary flex items-center gap-1 px-3 py-1 rounded-full"
               >
-                <span className="text-sm">{displayName}</span>
+                <span className="text-sm md:text-base text-headline">
+                  {displayName}
+                </span>
                 <button
-                    className="cursor-pointer"
+                  className="cursor-pointer text-headline hover:text-paragraph"
                   type="button"
                   onClick={() =>
                     onChange(value.filter((_, idx) => idx !== i))
@@ -92,16 +97,16 @@ const ConceptPicker = ({ value, onChange }: ConceptPickerProps) => {
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}
         placeholder="Search or create concept..."
-        className="px-4 py-2 border border-border rounded-lg w-full bg-surface text-headline"
+        className="px-4 py-2 border border-border rounded-lg w-full bg-surface text-headline text-sm md:text-base placeholder:text-muted focus:outline-none focus:border-primary"
       />
 
       {/* Suggestions */}
       {searchText.length > 0 && (
-        <ul className="border border-border rounded-lg max-h-48 overflow-y-auto">
+        <ul className="border border-border rounded-lg">
           {filteredConcepts.map((c) => (
             <li
               key={c.id}
-              className="px-4 py-2 text-sm cursor-pointer hover:bg-surface-hover"
+              className="px-4 py-2 text-sm md:text-base text-paragraph cursor-pointer hover:bg-surface-hover"
               onClick={() => handleAddExisting(c.id)}
             >
               {c.name}
@@ -110,7 +115,7 @@ const ConceptPicker = ({ value, onChange }: ConceptPickerProps) => {
 
           {!exactMatch && (
             <li className="px-4 py-3 flex flex-col gap-3">
-              <p className="text-primary text-sm">
+              <p className="text-primary text-sm md:text-base">
                 + Create "{searchText}" as new concept
               </p>
 
@@ -128,11 +133,13 @@ const ConceptPicker = ({ value, onChange }: ConceptPickerProps) => {
                     >
                       <span
                         className={`w-4 h-4 rounded-full border-2 ${item.border} 
-                                    flex items-center justify-center transition-colors
-                                    ${isSelected ? "border-solid" : "border-dashed"}`}
+                          flex items-center justify-center transition-colors
+                          ${isSelected ? "border-solid" : "border-dashed"}`}
                       >
                         {isSelected && (
-                          <span className={`w-2 h-2 rounded-full ${item.dot}`} />
+                          <span
+                            className={`w-2 h-2 rounded-full ${item.dot}`}
+                          />
                         )}
                       </span>
                       <span
@@ -147,14 +154,14 @@ const ConceptPicker = ({ value, onChange }: ConceptPickerProps) => {
                 })}
               </div>
 
-              <button
+              <Button
                 type="button"
+                variant="primary"
                 onClick={handleAddNew}
                 disabled={!newConceptRating}
-                className="cursor-pointer text-sm px-4 py-2 bg-primary text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Add Concept
-              </button>
+              </Button>
             </li>
           )}
         </ul>

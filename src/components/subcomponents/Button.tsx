@@ -32,7 +32,7 @@ const Button = ({
 
   return (
     <button
-      className={`${className} flex items-center justify-center font-bold gap-1.5 min-w-20 md:min-w-24 px-4 md:px-6 py-2 md:py-3 text-center text-sm disabled:opacity-50 disabled:cursor-not-allowed rounded-lg cursor-pointer ${buttonStyle(variant)}`}
+      className={`${className} flex items-center justify-center font-bold gap-1.5 min-w-20 md:min-w-24 px-4 md:px-6 py-2 md:py-3 text-center text-sm disabled:cursor-not-allowed rounded-lg cursor-pointer ${buttonStyle(variant)}`}
       type={type}
       onClick={onClick}
       disabled={disabled}

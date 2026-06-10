@@ -42,7 +42,10 @@ export const useAddConcept = () => {
 
 	return useMutation({
 		mutationFn: addConcept,
-		onSuccess: () => queryClient.invalidateQueries({ queryKey: ["concepts"] }),
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ["concepts"] });
+			queryClient.invalidateQueries({ queryKey: ["dashboard"] });
+		},
 	});
 };
 export const useAddConceptNote = () => {
@@ -62,6 +65,7 @@ export const useEditConcept = () => {
 		onSuccess: (_data, variables) => {
 			queryClient.invalidateQueries({ queryKey: ["concept", variables.id] });
 			queryClient.invalidateQueries({ queryKey: ["concepts"] });
+			queryClient.invalidateQueries({ queryKey: ["dashboard"] });
 		},
 	});
 };
@@ -73,6 +77,8 @@ export const useDeleteConcept = () => {
 		mutationFn: deleteConcept,
 		onSuccess: (_data, deletedId) => {
 			queryClient.invalidateQueries({ queryKey: ["concepts"] });
+			queryClient.invalidateQueries({ queryKey: ["projects"] });
+			queryClient.invalidateQueries({ queryKey: ["dashboard"] });
 			queryClient.removeQueries({ queryKey: ["concept", deletedId] });
 			navigate("/concepts");
 		},

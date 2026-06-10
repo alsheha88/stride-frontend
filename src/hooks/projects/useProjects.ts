@@ -41,7 +41,12 @@ export const useAddProject = () => {
 
 	return useMutation({
 		mutationFn: addProject,
-		onSuccess: () => queryClient.invalidateQueries({ queryKey: ["projects"] }),
+		onSuccess: () => {
+		queryClient.invalidateQueries({ queryKey: ["projects"] })
+		queryClient.invalidateQueries({ queryKey: ["dashboard"] })
+		queryClient.invalidateQueries({ queryKey: ["concepts"] })
+	
+	},
 	});
 };
 export const useEditProject = () => {
@@ -52,6 +57,7 @@ export const useEditProject = () => {
 		onSuccess: (_data, variables) => {
 			queryClient.invalidateQueries({ queryKey: ["project", variables.id] });
 			queryClient.invalidateQueries({ queryKey: ["projects"] });
+			queryClient.invalidateQueries({ queryKey: ["dashboard"] });
 		},
 	});
 };
@@ -76,6 +82,8 @@ export const useDeleteProject = () => {
 		mutationFn: deleteProject,
 		onSuccess: (_data, deletedId) => {
 			queryClient.invalidateQueries({ queryKey: ["projects"] });
+			queryClient.invalidateQueries({ queryKey: ["dashboard"] });
+			queryClient.invalidateQueries({ queryKey: ["concepts"] });
 			queryClient.removeQueries({ queryKey: ["project", deletedId] });
 			navigate("/projects");
 		},

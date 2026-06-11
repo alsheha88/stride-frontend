@@ -107,7 +107,7 @@ function ProjectDetailsPage() {
 							Project URL
 						</h4>
 						{project.evidenceUrl ? (
-							<p className="text-paragraph">{project.evidenceUrl}</p>
+							<a href={project.evidenceUrl} className="text-paragraph">{project.evidenceUrl}</a>
 						) : (
 							<p className="text-muted italic">No project link provided</p>
 						)}

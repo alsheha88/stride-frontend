@@ -1,29 +1,26 @@
-import {
-	useCurrentUser,
-	useDeleteUser,
-	useLogout,
-} from "../hooks/auth/useAuth";
+// UserProfilePage.tsx
+import { useCurrentUser, useLogout } from "../hooks/auth/useAuth";
 import { formatDate } from "../lib/utility";
 import Button from "../components/subcomponents/Button";
 import { ThreeCircles } from "react-loader-spinner";
+import { useState } from "react";
+import { AnimatePresence } from "motion/react";
+import DeleteAccountModal from "../components/modals/DeleteAccountModal";
 
 function UserProfilePage() {
 	const { data, isError, isLoading } = useCurrentUser();
-	const {
-		mutate: deleteUser,
-		isError: isDeleteError,
-		isPending: isDeleting,
-	} = useDeleteUser();
+	const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+
 	const { mutate: logout, isPending: isLoggingOut } = useLogout();
 
-	if (isLoading || isDeleting)
+	if (isLoading)
 		return (
 			<div className="h-dvh flex items-center justify-center">
 				<ThreeCircles color="#ff8906" />
 			</div>
 		);
 
-	if (isError || !data?.data.user || isDeleteError)
+	if (isError || !data?.data.user)
 		return (
 			<div className="h-dvh grid place-items-center">
 				<p className="text-2xl text-danger">Something went wrong</p>
@@ -59,10 +56,22 @@ function UserProfilePage() {
 					disabled={isLoggingOut}>
 					Log Out
 				</Button>
-				<Button type="button" variant="danger" onClick={() => deleteUser()}>
+				<Button
+					type="button"
+					variant="danger"
+					onClick={() => setIsDeleteOpen(true)}>
 					Delete Account
 				</Button>
 			</div>
+
+			<AnimatePresence>
+				{isDeleteOpen && (
+					<DeleteAccountModal
+						isOpen={isDeleteOpen}
+						onClose={() => setIsDeleteOpen(false)}
+					/>
+				)}
+			</AnimatePresence>
 		</main>
 	);
 }

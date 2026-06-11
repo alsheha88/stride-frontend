@@ -1,6 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 import NavBar from "./components/NavBar";
-import logo from "../public/logo.svg";
+import logo from "./assets/logo.svg";
 
 import { ProtectedRoute } from "./routes/ProtectedRoutes";
 

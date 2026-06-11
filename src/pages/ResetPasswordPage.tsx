@@ -8,12 +8,11 @@ import {
 import { useResetPassword } from "../hooks/auth/useAuth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { getApiErrorMessage } from "../lib/api";
-import logo from "../../public/logo.svg";
+import logo from "../assets/logo.svg";
 import { ThreeDots } from "react-loader-spinner";
 
 const ResetPasswordPage = () => {
-	const { mutate, isError, isPending, error } = useResetPassword();
+	const { mutate, isPending } = useResetPassword();
 	const [searchParams] = useSearchParams();
 	const {
 		register,
@@ -45,8 +44,6 @@ const ResetPasswordPage = () => {
 		confirmPassword: _confirmPassword,
 		...data
 	}) => {
-		console.log("submitting", data);
-
 		mutate({ ...data, token });
 	};
 
@@ -59,11 +56,6 @@ const ResetPasswordPage = () => {
 				<form
 					className="grid gap-6 w-full p-8 bg-surface border border-border rounded-lg"
 					onSubmit={handleSubmit(onSubmit)}>
-					{isError && (
-						<small className="text-danger text-xs md:text-sm text-center">
-							{getApiErrorMessage(error)}
-						</small>
-					)}
 
 					<div className="flex flex-col gap-2">
 						<Input type="password" text="Password" {...register("password")} />

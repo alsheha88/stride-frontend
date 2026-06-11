@@ -13,6 +13,8 @@ import {
 	getProjects,
 } from "../../api/projectsApi";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import { getApiErrorMessage } from "../../lib/api";
 
 type CompeleteProjectVariables = {
 	id: idParamsType;
@@ -33,7 +35,7 @@ export const useGetProject = (id: idParamsType) => {
 	return useQuery({
 		queryKey: ["project", id],
 		queryFn: () => getProject(id),
-	});
+	}, );
 };
 
 export const useAddProject = () => {
@@ -42,11 +44,14 @@ export const useAddProject = () => {
 	return useMutation({
 		mutationFn: addProject,
 		onSuccess: () => {
-		queryClient.invalidateQueries({ queryKey: ["projects"] })
-		queryClient.invalidateQueries({ queryKey: ["dashboard"] })
-		queryClient.invalidateQueries({ queryKey: ["concepts"] })
-	
-	},
+			queryClient.invalidateQueries({ queryKey: ["projects"] });
+			queryClient.invalidateQueries({ queryKey: ["dashboard"] });
+			queryClient.invalidateQueries({ queryKey: ["concepts"] });
+			toast.success("Project added");
+		},
+		onError: (error) => {
+			toast.error(getApiErrorMessage(error));
+		},
 	});
 };
 export const useEditProject = () => {
@@ -58,6 +63,10 @@ export const useEditProject = () => {
 			queryClient.invalidateQueries({ queryKey: ["project", variables.id] });
 			queryClient.invalidateQueries({ queryKey: ["projects"] });
 			queryClient.invalidateQueries({ queryKey: ["dashboard"] });
+			toast.success("Changes saved");
+		},
+		onError: (error) => {
+			toast.error(getApiErrorMessage(error));
 		},
 	});
 };
@@ -71,6 +80,10 @@ export const useCompleteProject = () => {
 			queryClient.invalidateQueries({ queryKey: ["projects"] });
 			queryClient.invalidateQueries({ queryKey: ["concepts"] });
 			queryClient.invalidateQueries({ queryKey: ["dashboard"] });
+			toast.success("Project completed");
+		},
+		onError: (error) => {
+			toast.error(getApiErrorMessage(error));
 		},
 	});
 };
@@ -85,7 +98,12 @@ export const useDeleteProject = () => {
 			queryClient.invalidateQueries({ queryKey: ["dashboard"] });
 			queryClient.invalidateQueries({ queryKey: ["concepts"] });
 			queryClient.removeQueries({ queryKey: ["project", deletedId] });
+			toast.success("Project deleted");
+
 			navigate("/projects");
+		},
+		onError: (error) => {
+			toast.error(getApiErrorMessage(error));
 		},
 	});
 };

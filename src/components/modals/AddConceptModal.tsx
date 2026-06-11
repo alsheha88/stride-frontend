@@ -7,7 +7,6 @@ import {
 	createConceptSchema,
 	type createConceptData,
 } from "../../schemas/conceptSchema";
-import { getApiErrorMessage } from "../../lib/api";
 import { useEscapeKey } from "../../hooks/useEscapeKey";
 import { motion } from "motion/react";
 import { ThreeDots } from "react-loader-spinner";
@@ -26,7 +25,7 @@ const tierColors = [
 ];
 
 const AddConceptModal = ({ isOpen, onClose }: ModalProps) => {
-	const { mutate: addConcept, isError, error, isPending } = useAddConcept();
+	const { mutate: addConcept, isPending } = useAddConcept();
 	useEscapeKey(isOpen, onClose);
 
 	const {
@@ -63,12 +62,6 @@ const AddConceptModal = ({ isOpen, onClose }: ModalProps) => {
 				<h3 className="text-paragraph text-xl md:text-2xl font-semibold">
 					Add Concept
 				</h3>
-
-				{isError && (
-					<p className="text-danger text-xs md:text-sm text-center">
-						{getApiErrorMessage(error)}
-					</p>
-				)}
 
 				<div className="flex flex-col gap-2">
 					<Input

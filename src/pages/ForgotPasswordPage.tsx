@@ -8,12 +8,11 @@ import {
 } from "../schemas/authSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { getApiErrorMessage } from "../lib/api";
-import logo from "../../public/logo.svg";
+import logo from "../assets/logo.svg";
 import { ThreeDots } from "react-loader-spinner";
 
 const ForgotPasswordPage = () => {
-	const { mutate, isError, isPending, error, isSuccess } = useForgotPassword();
+	const { mutate, isPending } = useForgotPassword();
 	const {
 		register,
 		handleSubmit,
@@ -35,12 +34,6 @@ const ForgotPasswordPage = () => {
 				<form
 					className="grid gap-6 w-full p-8 bg-surface border border-border rounded-lg"
 					onSubmit={handleSubmit(onSubmit)}>
-					{isError && (
-						<small className="text-danger text-xs md:text-sm text-center">
-							{getApiErrorMessage(error)}
-						</small>
-					)}
-
 					<div className="flex flex-col gap-2">
 						<Input type="text" text="Email" {...register("email")} />
 						{errors.email && (
@@ -50,15 +43,12 @@ const ForgotPasswordPage = () => {
 						)}
 					</div>
 
-					{isSuccess && (
-						<small className="text-success text-xs md:text-sm text-center">
-							If an account exists with that email, a password reset link has
-							been sent.
-						</small>
-					)}
-
 					<Button variant="primary" type="submit" disabled={isPending}>
-						{isPending ? <ThreeDots color="#0f0e17" width={16} height={16} /> : "Send Reset Link"}
+						{isPending ? (
+							<ThreeDots color="#0f0e17" width={16} height={16} />
+						) : (
+							"Send Reset Link"
+						)}
 					</Button>
 
 					<p className="text-paragraph text-sm md:text-base text-center flex justify-center items-center gap-2.5">

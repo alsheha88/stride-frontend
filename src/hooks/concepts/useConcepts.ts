@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 import {
 	addConcept,
@@ -14,6 +15,7 @@ import {
 	type idParamsType,
 	type updateConceptData,
 } from "../../schemas/conceptSchema";
+import { getApiErrorMessage } from "../../lib/api";
 
 type AddNoteVariables = {
 	id: idParamsType;
@@ -30,6 +32,7 @@ export const useGetConcepts = () => {
 		queryFn: getConcepts,
 	});
 };
+
 export const useGetConcept = (id: idParamsType) => {
 	return useQuery({
 		queryKey: ["concept", id],
@@ -37,6 +40,7 @@ export const useGetConcept = (id: idParamsType) => {
 		enabled: !!id,
 	});
 };
+
 export const useAddConcept = () => {
 	const queryClient = useQueryClient();
 
@@ -45,18 +49,29 @@ export const useAddConcept = () => {
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ["concepts"] });
 			queryClient.invalidateQueries({ queryKey: ["dashboard"] });
+			toast.success("Concept added");
+		},
+		onError: (error) => {
+			toast.error(getApiErrorMessage(error));
 		},
 	});
 };
+
 export const useAddConceptNote = () => {
 	const queryClient = useQueryClient();
 
 	return useMutation<unknown, Error, AddNoteVariables>({
 		mutationFn: ({ id, note }) => addConceptNote(id, note),
-		onSuccess: (_data, variables) =>
-			queryClient.invalidateQueries({ queryKey: ["concept", variables.id] }),
+		onSuccess: (_data, variables) => {
+			queryClient.invalidateQueries({ queryKey: ["concept", variables.id] });
+			toast.success("Note added");
+		},
+		onError: (error) => {
+			toast.error(getApiErrorMessage(error));
+		},
 	});
 };
+
 export const useEditConcept = () => {
 	const queryClient = useQueryClient();
 
@@ -66,9 +81,14 @@ export const useEditConcept = () => {
 			queryClient.invalidateQueries({ queryKey: ["concept", variables.id] });
 			queryClient.invalidateQueries({ queryKey: ["concepts"] });
 			queryClient.invalidateQueries({ queryKey: ["dashboard"] });
+			toast.success("Changes saved");
+		},
+		onError: (error) => {
+			toast.error(getApiErrorMessage(error));
 		},
 	});
 };
+
 export const useDeleteConcept = () => {
 	const queryClient = useQueryClient();
 	const navigate = useNavigate();
@@ -80,7 +100,11 @@ export const useDeleteConcept = () => {
 			queryClient.invalidateQueries({ queryKey: ["projects"] });
 			queryClient.invalidateQueries({ queryKey: ["dashboard"] });
 			queryClient.removeQueries({ queryKey: ["concept", deletedId] });
+			toast.success("Concept deleted");
 			navigate("/concepts");
+		},
+		onError: (error) => {
+			toast.error(getApiErrorMessage(error));
 		},
 	});
 };

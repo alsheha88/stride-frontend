@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import logo from "../../public/logo.svg";
+import logo from "../assets/logo.svg";
 
 const NotFoundPage = () => (
   <main className="min-h-dvh grid place-items-center px-3 md:px-8 py-8">

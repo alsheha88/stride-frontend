@@ -16,7 +16,8 @@ const statusMap = {
 } as const;
 
 const ProjectsOverviewPage = () => {
-  const { data, isLoading, isError, error } = useGetProjects();
+  const { data, isLoading, isError, error
+   } = useGetProjects();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [status, setStatus] = useState("");
   const [searchText, setSearchText] = useState("");
@@ -45,9 +46,10 @@ const ProjectsOverviewPage = () => {
         <ThreeCircles color="#ff8906" />
       </div>
     );
+  
 
   return (
-    <main className="min-h-dvh flex flex-col gap-10 px-3 md:px-8 pt-4 pb-16 max-w-6xl mx-auto">
+    <main className="min-h-dvh flex flex-col gap-10 px-3 md:px-8 pt-4 pb-16 max-w-6xl mx-auto relative">
       <h1 className="text-2xl md:text-3xl text-paragraph">Projects Overview</h1>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-6xl mx-auto w-full">
@@ -184,8 +186,8 @@ const ProjectsOverviewPage = () => {
       <AnimatePresence>
         {isModalOpen && (
           <AddProjectModal
-            isOpen={isModalOpen}
-            onClose={() => setIsModalOpen(false)}
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
           />
         )}
       </AnimatePresence>

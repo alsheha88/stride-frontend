@@ -5,12 +5,11 @@ import { useSignup } from "../hooks/auth/useAuth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { type SignUpData, signUpSchema } from "../schemas/authSchema";
-import { getApiErrorMessage } from "../lib/api";
-import logo from "../../public/logo.svg";
+import logo from "../assets/logo.svg";
 import { ThreeDots } from "react-loader-spinner";
 
 const SignupPage = () => {
-	const { mutate, isError, isPending, error } = useSignup();
+	const { mutate, isPending } = useSignup();
 	const {
 		register,
 		handleSubmit,
@@ -35,12 +34,6 @@ const SignupPage = () => {
 				<form
 					className="grid gap-6 w-full p-8 bg-surface border border-border rounded-lg"
 					onSubmit={handleSubmit(onSubmit)}>
-					{isError && (
-						<small className="text-danger text-xs md:text-sm text-center">
-							{getApiErrorMessage(error)}
-						</small>
-					)}
-
 					<div className="flex flex-col gap-2">
 						<Input type="text" text="Full Name" {...register("name")} />
 						{errors.name && (
@@ -82,7 +75,11 @@ const SignupPage = () => {
 					</div>
 
 					<Button variant="primary" type="submit" disabled={isPending}>
-						{isPending ? <ThreeDots color="#0f0e17" width={16} height={16} /> : "Sign Up"}
+						{isPending ? (
+							<ThreeDots color="#0f0e17" width={16} height={16} />
+						) : (
+							"Sign Up"
+						)}
 					</Button>
 
 					<p className="text-paragraph text-sm md:text-base text-center flex justify-center items-center gap-2.5">

@@ -42,4 +42,10 @@ export const user = async () => {
   return res.data;
 };
 
+export const deleteUser = async () => {
+	const res = await api.delete("/auth/me");
+
+	return res.data
+}
+
 

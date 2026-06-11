@@ -6,6 +6,7 @@ import {
 	resetPassword,
 	user,
 	forgotPassword,
+	deleteUser,
 } from "../../api/authApi";
 import { useNavigate } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -43,7 +44,7 @@ export const useLogout = () => {
 		mutationFn: logout,
 		onSuccess: () => {
 			clearAuthToken();
-			queryClient.clear()
+			queryClient.clear();
 			navigate("/login");
 		},
 	});
@@ -85,3 +86,16 @@ export const useCurrentUser = () => {
 	});
 };
 
+export const useDeleteUser = () => {
+	const queryClient = useQueryClient();
+
+	const navigate = useNavigate();
+
+	return useMutation({
+		mutationFn: deleteUser,
+		onSuccess: () => {
+			queryClient.clear();
+			navigate("/login");
+		},
+	});
+};

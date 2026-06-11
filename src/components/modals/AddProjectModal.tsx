@@ -83,7 +83,11 @@ function AddProjectModal({ isOpen, onClose }: AddProjectModalProps) {
 				</div>
 
 				{step === 1 && (
-					<div className="flex flex-col gap-4">
+					<motion.div
+						className="flex flex-col gap-4"
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						transition={{ duration: 0.3 }}>
 						<div className="flex flex-col gap-1">
 							<Input type="text" text="Project Name" {...register("name")} />
 							{errors.name && (
@@ -116,11 +120,15 @@ function AddProjectModal({ isOpen, onClose }: AddProjectModalProps) {
 								</small>
 							)}
 						</div>
-					</div>
+					</motion.div>
 				)}
 
 				{step === 2 && (
-					<div className="flex flex-col gap-2">
+					<motion.div
+						className="flex flex-col gap-2"
+						initial={{ opacity: 0, x: -10 }}
+						animate={{ opacity: 1, x: 0 }}
+						transition={{ duration: 0.3 }}>
 						<p className="text-sm md:text-base text-paragraph">
 							Linked Concepts
 						</p>
@@ -131,7 +139,7 @@ function AddProjectModal({ isOpen, onClose }: AddProjectModalProps) {
 								<ConceptPicker value={field.value} onChange={field.onChange} />
 							)}
 						/>
-					</div>
+					</motion.div>
 				)}
 
 				<div className="flex items-center gap-2.5 place-self-end">
@@ -144,7 +152,10 @@ function AddProjectModal({ isOpen, onClose }: AddProjectModalProps) {
 								disabled={isPending}>
 								Cancel
 							</Button>
-							<button type="button" className="bg-primary flex items-center justify-center font-bold gap-1.5 min-w-20 md:min-w-24 px-4 md:px-6 py-2 md:py-3 text-center text-sm disabled:cursor-not-allowed rounded-lg cursor-pointer " onClick={handleNext}>
+							<button
+								type="button"
+								className="bg-primary flex items-center justify-center font-bold gap-1.5 min-w-20 md:min-w-24 px-4 md:px-6 py-2 md:py-3 text-center text-sm disabled:cursor-not-allowed rounded-lg cursor-pointer "
+								onClick={handleNext}>
 								Next
 							</button>
 						</>

@@ -34,7 +34,6 @@ export const forgotPasswordSchema = z.object({
 
 export const resetPasswordSchema = z
 	.object({
-		token: z.string().min(1),
 		password: passwordField,
 		confirmPassword: z.string().min(1, "Please confirm your password"),
 	})
@@ -44,8 +43,12 @@ export const resetPasswordSchema = z
 	});
 
 export type SignUpPayload = Omit<SignUpData, "confirmPassword">;
-export type ResetPasswordPayload = Omit<ResetPasswordData, "confirmPassword">;
-
+export type ResetPasswordPayload = Omit<
+	ResetPasswordData,
+	"confirmPassword"
+> & {
+	token: string;
+};
 export type SignUpData = z.infer<typeof signUpSchema>;
 export type LoginData = z.infer<typeof loginSchema>;
 export type VerifyEmailData = z.infer<typeof verifyEmailSchema>;

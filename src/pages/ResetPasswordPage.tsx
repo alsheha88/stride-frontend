@@ -45,6 +45,8 @@ const ResetPasswordPage = () => {
 		confirmPassword: _confirmPassword,
 		...data
 	}) => {
+		console.log("submitting", data);
+
 		mutate({ ...data, token });
 	};
 
@@ -86,7 +88,11 @@ const ResetPasswordPage = () => {
 					</div>
 
 					<Button variant="primary" type="submit" disabled={isPending}>
-						{isPending ? <ThreeDots color="#0f0e17" width={16} height={16} /> : "Reset Password"}
+						{isPending ? (
+							<ThreeDots color="#0f0e17" width={16} height={16} />
+						) : (
+							"Reset Password"
+						)}
 					</Button>
 
 					<p className="text-paragraph text-sm md:text-base text-center flex justify-center items-center gap-2.5">

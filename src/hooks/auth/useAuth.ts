@@ -16,7 +16,7 @@ import {
 	setAuthToken,
 } from "../../lib/api";
 import toast from "react-hot-toast";
-
+import * as Sentry from "@sentry/react";
 export const useLogin = () => {
 	const queryClient = useQueryClient();
 	const navigate = useNavigate();
@@ -25,6 +25,7 @@ export const useLogin = () => {
 		mutationFn: login,
 		onSuccess: (response) => {
 			setAuthToken(response.data.accessToken);
+			Sentry.setUser({ id: response.data.user.id });
 			queryClient.invalidateQueries({ queryKey: ["me"] });
 			toast.success("Welcome back!");
 			navigate("/");
@@ -59,6 +60,7 @@ export const useLogout = () => {
 		onSuccess: () => {
 			clearAuthToken();
 			queryClient.clear();
+			Sentry.setUser(null);
 			navigate("/login");
 		},
 	});
@@ -122,6 +124,7 @@ export const useDeleteUser = () => {
 		onSuccess: () => {
 			clearAuthToken();
 			queryClient.clear();
+			Sentry.setUser(null);
 			toast.success("Account deleted");
 			navigate("/login");
 		},

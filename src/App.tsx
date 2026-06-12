@@ -13,6 +13,7 @@ import ProtectedLayout from "./ProtectedLayout";
 import NotFoundPage from "./pages/NotFoundPage";
 import UserProfilePage from "./pages/UserProfilePage";
 
+
 function App() {
 	return (
 		<Routes>

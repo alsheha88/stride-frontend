@@ -11,6 +11,7 @@ import DashboardEmptyState from "../components/DashboardEmptyState";
 import { getApiErrorMessage } from "../lib/api";
 import { motion } from "motion/react";
 
+
 const statusMap = {
 	NOT_STARTED: { label: "Not Started", style: "text-muted" },
 	IN_PROGRESS: { label: "In Progress", style: "text-primary" },
@@ -24,6 +25,8 @@ const tierColors = [
 	{ filled: "bg-success", rating: "Strong" },
 	{ filled: "bg-tertiary", rating: "Mastered" },
 ];
+
+
 
 const HomePage = () => {
 	const { data, isError, isLoading, error } = useGetDashboard();

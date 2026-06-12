@@ -38,11 +38,6 @@ api.interceptors.response.use(
 	async (error) => {
 		const originalRequest = error.config;
 
-		// Conditions to attempt refresh:
-		// 1. Got a 401
-		// 2. This request hasn't already been retried
-		// 3. This isn't itself a refresh/login request
-
 		if (
 			error.response?.status === 401 &&
 			!originalRequest._retry &&
@@ -74,12 +69,18 @@ api.interceptors.response.use(
 );
 
 export const getApiErrorMessage = (error: unknown): string => {
-	if (
-		(error as AxiosError<{ error: { message: string } }>)?.response?.data?.error
-			?.message
-	) {
-		return (error as AxiosError<{ error: { message: string } }>).response!.data
-			.error.message;
+	const axiosError = error as AxiosError<{
+		error?: { message: string };
+		message?: string;
+	}>;
+
+	if (axiosError?.response?.data?.error?.message) {
+		return axiosError.response.data.error.message;
 	}
+
+	if (axiosError?.response?.data?.message) {
+		return axiosError.response.data.message;
+	}
+
 	return "Something went wrong";
 };

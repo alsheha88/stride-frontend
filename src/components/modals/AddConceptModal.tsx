@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useAddConcept } from "../../hooks/concepts/useConcepts";
 import {
 	createConceptSchema,
-	type createConceptData,
+	type CreateConceptData,
 } from "../../schemas/conceptSchema";
 import { useEscapeKey } from "../../hooks/useEscapeKey";
 import { motion } from "motion/react";
@@ -34,11 +34,11 @@ const AddConceptModal = ({ isOpen, onClose }: ModalProps) => {
 		control,
 		reset,
 		formState: { errors },
-	} = useForm<createConceptData>({
+	} = useForm<CreateConceptData>({
 		resolver: zodResolver(createConceptSchema),
 	});
 
-	const onSubmit: SubmitHandler<createConceptData> = (data) => {
+	const onSubmit: SubmitHandler<CreateConceptData> = (data) => {
 		addConcept(data, {
 			onSuccess: () => {
 				reset();

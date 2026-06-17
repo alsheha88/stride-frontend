@@ -34,6 +34,7 @@ import { getApiErrorMessage } from "../lib/api";
 import EditConceptModal from "../components/modals/EditConceptModal";
 import DeleteConceptModal from "../components/modals/DeleteConceptModal";
 import { AnimatePresence, motion } from "motion/react";
+import CustomTooltip from "../components/subcomponents/CustomToolTip";
 
 const statusMap = {
 	NOT_STARTED: {
@@ -384,7 +385,10 @@ const ConceptDetailPage = () => {
 								domain={[0, 5]}
 								ticks={[1, 2, 3, 4, 5]}
 							/>
-							<Tooltip />
+							<Tooltip
+								content={<CustomTooltip />}
+								cursor={{ stroke: "#6b6a78", strokeDasharray: "5 5" }}
+							/>
 							<Line
 								type="monotone"
 								dataKey="rating"

@@ -97,16 +97,72 @@ body,
 	min-height: 100%;
 	font-family: var(--font-sans);
 	font-weight: 500;
-	background-color: var(--color-background);
+	background-image: linear-gradient(
+		0deg,
+		hsl(247deg 24% 7%) 0%,
+		hsl(246deg 26% 7%) 3%,
+		hsl(247deg 23% 8%) 6%,
+		hsl(246deg 25% 8%) 11%,
+		hsl(246deg 24% 8%) 17%,
+		hsl(246deg 24% 8%) 27%,
+		hsl(246deg 23% 9%) 39%,
+		hsl(245deg 24% 9%) 52%,
+		hsl(246deg 22% 9%) 64%,
+		hsl(245deg 23% 9%) 73%,
+		hsl(245deg 22% 10%) 80%,
+		hsl(245deg 22% 10%) 85%,
+		hsl(245deg 22% 10%) 89%,
+		hsl(245deg 22% 10%) 92%,
+		hsl(245deg 21% 10%) 94%,
+		hsl(245deg 22% 11%) 96%,
+		hsl(245deg 20% 11%) 98%,
+		hsl(245deg 21% 11%) 99%,
+		hsl(245deg 21% 11%) 99%,
+		hsl(245deg 21% 11%) 100%,
+		hsl(245deg 20% 12%) 100%,
+		hsl(245deg 20% 12%) 100%,
+		hsl(245deg 19% 12%) 100%
+	);
 	color: var(--color-headline);
 }
-h2, h3, h4{
+h2,
+h3,
+h4 {
 	font-weight: 600;
 	color: var(--color-paragraph);
 }
 
-p{
+p {
 	font-weight: 400;
 }
 
-
+.gradient {
+  background-image: linear-gradient(
+    90deg,
+    hsl(60deg 100% 100%) 0%,
+    hsl(83deg 16% 97%) 1%,
+    hsl(110deg 13% 94%) 3%,
+    hsl(139deg 14% 91%) 5%,
+    hsl(156deg 16% 88%) 7%,
+    hsl(169deg 17% 84%) 9%,
+    hsl(180deg 18% 81%) 11%,
+    hsl(189deg 21% 79%) 14%,
+    hsl(196deg 22% 76%) 17%,
+    hsl(203deg 23% 75%) 20%,
+    hsl(210deg 22% 73%) 23%,
+    hsl(220deg 19% 71%) 26%,
+    hsl(235deg 15% 70%) 29%,
+    hsl(235deg 13% 68%) 33%,
+    hsl(236deg 12% 66%) 36%,
+    hsl(237deg 11% 63%) 40%,
+    hsl(238deg 10% 61%) 44%,
+    hsl(238deg 9% 59%) 48%,
+    hsl(239deg 8% 57%) 53%,
+    hsl(240deg 7% 55%) 57%,
+    hsl(241deg 7% 53%) 62%,
+    hsl(242deg 6% 51%) 68%,
+    hsl(243deg 6% 48%) 74%,
+    hsl(243deg 6% 46%) 82%,
+    hsl(244deg 6% 44%) 97%
+  );
+}

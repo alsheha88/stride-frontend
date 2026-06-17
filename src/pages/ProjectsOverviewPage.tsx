@@ -10,9 +10,9 @@ import { AnimatePresence } from "motion/react";
 import { formatDate } from "../lib/utility";
 
 const statusMap = {
-  NOT_STARTED: { label: "Not Started", style: "text-muted" },
-  IN_PROGRESS: { label: "In Progress", style: "text-primary" },
-  COMPLETED: { label: "Completed", style: "text-success" },
+  NOT_STARTED: { label: "Not Started", style: "text-muted py-1 px-2 bg-muted/33 border border-muted" },
+  IN_PROGRESS: { label: "In Progress", style: "text-primary py-1 px-2 bg-primary/33 border border-primary" },
+  COMPLETED: { label: "Completed", style: "text-success py-1 px-2 bg-success/33 border border-success" },
 } as const;
 
 const ProjectsOverviewPage = () => {

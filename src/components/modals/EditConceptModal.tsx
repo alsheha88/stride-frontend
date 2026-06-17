@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEditConcept } from "../../hooks/concepts/useConcepts";
 import {
-	type updateConceptData,
+	type UpdateConceptData,
 	updateConceptSchema,
 } from "../../schemas/conceptSchema";
 import { useForm, type SubmitHandler } from "react-hook-form";
@@ -30,7 +30,7 @@ function EditConceptModal({
 		handleSubmit,
 		reset,
 		formState: { errors },
-	} = useForm<updateConceptData>({
+	} = useForm<UpdateConceptData>({
 		resolver: zodResolver(updateConceptSchema),
 		defaultValues: {
 			name: currentName,
@@ -38,7 +38,7 @@ function EditConceptModal({
 	});
 	useEscapeKey(isOpen, onClose);
 
-	const onSubmit: SubmitHandler<updateConceptData> = (data) =>
+	const onSubmit: SubmitHandler<UpdateConceptData> = (data) =>
 		mutate(
 			{ data, id: conceptId },
 			{

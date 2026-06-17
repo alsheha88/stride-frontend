@@ -9,22 +9,11 @@ import {
 	getConcepts,
 	editConcept,
 	deleteConcept,
+	editConceptNote,
+	deleteConceptNote,
 } from "../../api/conceptsApi";
-import {
-	type createConceptNoteData,
-	type idParamsType,
-	type updateConceptData,
-} from "../../schemas/conceptSchema";
+import { type IdParamsType } from "../../schemas/conceptSchema";
 import { getApiErrorMessage } from "../../lib/api";
-
-type AddNoteVariables = {
-	id: idParamsType;
-	note: createConceptNoteData;
-};
-type EditConceptVariables = {
-	id: idParamsType;
-	data: updateConceptData;
-};
 
 export const useGetConcepts = () => {
 	return useQuery({
@@ -33,7 +22,7 @@ export const useGetConcepts = () => {
 	});
 };
 
-export const useGetConcept = (id: idParamsType) => {
+export const useGetConcept = (id: IdParamsType) => {
 	return useQuery({
 		queryKey: ["concept", id],
 		queryFn: () => getConcept(id),
@@ -60,8 +49,8 @@ export const useAddConcept = () => {
 export const useAddConceptNote = () => {
 	const queryClient = useQueryClient();
 
-	return useMutation<unknown, Error, AddNoteVariables>({
-		mutationFn: ({ id, note }) => addConceptNote(id, note),
+	return useMutation({
+		mutationFn: addConceptNote,
 		onSuccess: (_data, variables) => {
 			queryClient.invalidateQueries({ queryKey: ["concept", variables.id] });
 			toast.success("Note added");
@@ -75,8 +64,8 @@ export const useAddConceptNote = () => {
 export const useEditConcept = () => {
 	const queryClient = useQueryClient();
 
-	return useMutation<unknown, Error, EditConceptVariables>({
-		mutationFn: ({ id, data }) => editConcept(id, data),
+	return useMutation({
+		mutationFn: editConcept,
 		onSuccess: (_data, variables) => {
 			queryClient.invalidateQueries({ queryKey: ["concept", variables.id] });
 			queryClient.invalidateQueries({ queryKey: ["concepts"] });
@@ -88,7 +77,35 @@ export const useEditConcept = () => {
 		},
 	});
 };
+export const useEditConceptNote = () => {
+	const queryClient = useQueryClient();
 
+	return useMutation({
+		mutationFn: editConceptNote,
+		onSuccess: (_data, variables) => {
+			queryClient.invalidateQueries({ queryKey: ["concept", variables.id] });
+			toast.success("Changes saved");
+		},
+		onError: (error) => {
+			toast.error(getApiErrorMessage(error));
+		},
+	});
+};
+
+export const useDeleteConceptNote = () => {
+	const queryClient = useQueryClient();
+
+	return useMutation({
+		mutationFn: deleteConceptNote,
+		onSuccess: (_data, deletedId) => {
+			queryClient.invalidateQueries({ queryKey: ["concept", deletedId.id] });
+			toast.success("Note deleted");
+		},
+		onError: (error) => {
+			toast.error(getApiErrorMessage(error));
+		},
+	});
+};
 export const useDeleteConcept = () => {
 	const queryClient = useQueryClient();
 	const navigate = useNavigate();

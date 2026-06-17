@@ -1,14 +1,12 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import type {
-	UpdateProjectData,
-	CompleteProjectData,
-} from "../../schemas/projectsSchema";
-import type { idParamsType } from "../../schemas/conceptSchema";
+import type { IdParamsType } from "../../schemas/conceptSchema";
 import {
 	addProject,
 	completeProject,
 	deleteProject,
 	editProject,
+	editProjectStatus,
+	editProjectLessons,
 	getProject,
 	getProjects,
 } from "../../api/projectsApi";
@@ -16,26 +14,18 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { getApiErrorMessage } from "../../lib/api";
 
-type CompeleteProjectVariables = {
-	id: idParamsType;
-	data: CompleteProjectData;
-};
-type EditProjectVariables = {
-	id: idParamsType;
-	data: UpdateProjectData;
-};
-
 export const useGetProjects = () => {
 	return useQuery({
 		queryKey: ["projects"],
 		queryFn: getProjects,
 	});
 };
-export const useGetProject = (id: idParamsType) => {
+
+export const useGetProject = (id: IdParamsType) => {
 	return useQuery({
 		queryKey: ["project", id],
 		queryFn: () => getProject(id),
-	}, );
+	});
 };
 
 export const useAddProject = () => {
@@ -54,11 +44,12 @@ export const useAddProject = () => {
 		},
 	});
 };
+
 export const useEditProject = () => {
 	const queryClient = useQueryClient();
 
-	return useMutation<unknown, Error, EditProjectVariables>({
-		mutationFn: ({ id, data }) => editProject(id, data),
+	return useMutation({
+		mutationFn: editProject,
 		onSuccess: (_data, variables) => {
 			queryClient.invalidateQueries({ queryKey: ["project", variables.id] });
 			queryClient.invalidateQueries({ queryKey: ["projects"] });
@@ -70,11 +61,44 @@ export const useEditProject = () => {
 		},
 	});
 };
+
+export const useEditProjectStatus = () => {
+	const queryClient = useQueryClient();
+
+	return useMutation({
+		mutationFn: editProjectStatus,
+		onSuccess: (_data, variables) => {
+			queryClient.invalidateQueries({ queryKey: ["project", variables.id] });
+			queryClient.invalidateQueries({ queryKey: ["projects"] });
+			queryClient.invalidateQueries({ queryKey: ["dashboard"] });
+			toast.success("Status updated");
+		},
+		onError: (error) => {
+			toast.error(getApiErrorMessage(error));
+		},
+	});
+};
+
+export const useEditProjectLessons = () => {
+	const queryClient = useQueryClient();
+
+	return useMutation({
+		mutationFn: editProjectLessons,
+		onSuccess: (_data, variables) => {
+			queryClient.invalidateQueries({ queryKey: ["project", variables.id] });
+			toast.success("Lessons updated");
+		},
+		onError: (error) => {
+			toast.error(getApiErrorMessage(error));
+		},
+	});
+};
+
 export const useCompleteProject = () => {
 	const queryClient = useQueryClient();
 
-	return useMutation<unknown, Error, CompeleteProjectVariables>({
-		mutationFn: ({ id, data }) => completeProject(id, data),
+	return useMutation({
+		mutationFn: completeProject,
 		onSuccess: (_data, variables) => {
 			queryClient.invalidateQueries({ queryKey: ["project", variables.id] });
 			queryClient.invalidateQueries({ queryKey: ["projects"] });
@@ -87,6 +111,7 @@ export const useCompleteProject = () => {
 		},
 	});
 };
+
 export const useDeleteProject = () => {
 	const queryClient = useQueryClient();
 	const navigate = useNavigate();
@@ -99,7 +124,6 @@ export const useDeleteProject = () => {
 			queryClient.invalidateQueries({ queryKey: ["concepts"] });
 			queryClient.removeQueries({ queryKey: ["project", deletedId] });
 			toast.success("Project deleted");
-
 			navigate("/projects");
 		},
 		onError: (error) => {

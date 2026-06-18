@@ -28,7 +28,7 @@ const tierColors = [
 
 
 
-const HomePage = () => {
+const DashboardPage = () => {
 	const { data, isError, isLoading, error } = useGetDashboard();
 
 	const dashboardStats = data?.data;
@@ -212,4 +212,4 @@ const HomePage = () => {
 	);
 };
 
-export default HomePage;
+export default DashboardPage;

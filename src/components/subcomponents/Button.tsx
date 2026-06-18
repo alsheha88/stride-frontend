@@ -1,3 +1,4 @@
+
 type ButtonProps = {
   variant: "primary" | "secondary" | "ghost" | "danger";
   onClick?: () => void;
@@ -5,6 +6,7 @@ type ButtonProps = {
   disabled?: boolean;
   type: "button" | "submit";
   className?: string;
+  ref?: React.Ref<HTMLButtonElement>
 };
 
 const Button = ({
@@ -14,6 +16,7 @@ const Button = ({
   disabled = false,
   type = "button",
   className = "",
+  ref
 }: ButtonProps) => {
   function buttonStyle(variant: string) {
     if (variant === "primary") {
@@ -32,6 +35,7 @@ const Button = ({
 
   return (
     <button
+      ref={ref}
       className={`${className} flex items-center justify-center font-bold gap-1.5 min-w-20 md:min-w-24 px-4 md:px-6 py-2 md:py-3 text-center text-sm disabled:cursor-not-allowed rounded-lg cursor-pointer ${buttonStyle(variant)}`}
       type={type}
       onClick={onClick}

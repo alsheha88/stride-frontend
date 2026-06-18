@@ -7,7 +7,7 @@ const NavBar = () => {
         <ul className="flex items-center gap-1 md:gap-2 text-sm md:text-base">
           <li>
             <NavLink
-              to="/"
+              to="/dashboard"
               className={({ isActive }) =>
                 `px-3 md:px-4 py-2 rounded-full transition-colors block ${
                   isActive

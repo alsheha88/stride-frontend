@@ -28,7 +28,7 @@ export const useLogin = () => {
 			Sentry.setUser({ id: response.data.user.id });
 			queryClient.invalidateQueries({ queryKey: ["me"] });
 			toast.success("Welcome back!");
-			navigate("/");
+			navigate("/dashboard");
 		},
 		onError: (error) => {
 			toast.error(getApiErrorMessage(error));

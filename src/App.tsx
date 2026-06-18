@@ -5,25 +5,41 @@ import ResetPasswordPage from "./pages/ResetPasswordPage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import ConceptOverviewPage from "./pages/ConceptOverviewPage";
 import ProjectsOverviewPage from "./pages/ProjectsOverviewPage";
-import HomePage from "./pages/HomePage";
 import ConceptDetailsPage from "./pages/ConceptDetailsPage";
 import ProjectDetailsPage from "./pages/ProjectDetailsPage";
 import VerifyEmailPage from "./pages/VerifyEmailPage";
 import ProtectedLayout from "./ProtectedLayout";
 import NotFoundPage from "./pages/NotFoundPage";
 import UserProfilePage from "./pages/UserProfilePage";
-
+import LandingPage from "./pages/LandingPage";
+import DashboardPage from "./pages/DashboardPage";
+import { PublicOnlyRoute } from "./routes/ProtectedRoutes";
 
 function App() {
 	return (
 		<Routes>
-			<Route path="/login" element={<LoginPage />} />
-			<Route path="/signup" element={<SignupPage />} />
+			<Route
+				path="/login"
+				element={
+					<PublicOnlyRoute>
+						<LoginPage />
+					</PublicOnlyRoute>
+				}
+			/>
+			<Route path="/" element={<LandingPage />} />
+			<Route
+				path="/signup"
+				element={
+					<PublicOnlyRoute>
+						<SignupPage />
+					</PublicOnlyRoute>
+				}
+			/>
 			<Route path="/reset-password" element={<ResetPasswordPage />} />
 			<Route path="/forgot-password" element={<ForgotPasswordPage />} />
 			<Route path="/verify-email" element={<VerifyEmailPage />} />
 			<Route element={<ProtectedLayout />}>
-				<Route path="/" element={<HomePage />} />
+				<Route path="/dashboard" element={<DashboardPage />} />
 				<Route path="/concepts" element={<ConceptOverviewPage />} />
 				<Route path="/projects" element={<ProjectsOverviewPage />} />
 				<Route path="/concepts/:id" element={<ConceptDetailsPage />} />

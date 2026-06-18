@@ -19,7 +19,7 @@ const ListRow = ({
 			transition={
 				shouldAnimate ? { duration: 0.5, delay: index * 0.05 } : undefined
 			}
-			className={`py-4 border-b border-border last:border-b-0`}>
+			className={`py-4 border-b-2 border-border last:border-b-0`}>
 			<div
 				className={`${className} max-w-6xl mx-auto place-items-center text-center  `}>
 				{children}

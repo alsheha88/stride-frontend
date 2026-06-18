@@ -15,3 +15,18 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
 
 	return children;
 }
+
+export function PublicOnlyRoute({ children }: { children: React.ReactNode }) {
+	const { data, isLoading } = useCurrentUser();
+
+	if (isLoading)
+		return (
+			<div className="flex items-center justify-center min-h-screen">
+				<ThreeCircles color="#ff8906" />
+			</div>
+		);
+
+	if (data) return <Navigate to="/dashboard" replace />;
+
+	return children;
+}

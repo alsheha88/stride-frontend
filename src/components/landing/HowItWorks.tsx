@@ -10,7 +10,7 @@ function HowItWorks() {
 				transition={{ duration: 0.6 }}
 				viewport={{ once: true }}
 				className="mb-20">
-				<h2 className="text-4xl md:text-5xl tracking-tight">How it works</h2>
+				<h2 className="text-2xl sm:text-4xl md:text-5xl tracking-tight">How it works</h2>
 				<p className="mt-4 max-w-2xl text-muted text-lg">
 					Turn concepts into projects. Turn projects into confidence. Watch
 					progress become impossible to ignore.
@@ -52,10 +52,10 @@ function HowItWorks() {
 							<div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,137,6,0.12)_0%,transparent_45%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
 							<div className="relative">
-								<h3 className="text-xl md:text-2xl font-semibold">
+								<h3 className="text-lg md:text-2xl font-semibold">
 									{item.title}
 								</h3>
-								<p className="mt-3 text-muted leading-relaxed">
+								<p className="mt-3 text-muted text-md sm:text-base leading-relaxed">
 									{item.description}
 								</p>
 							</div>

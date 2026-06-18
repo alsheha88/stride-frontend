@@ -11,7 +11,7 @@ function Hero() {
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.6, delay: 0 }}
-				className="text-headline/92 text-7xl font-bold tracking-tight">
+				className="text-headline/92 text-3xl sm:text-5xl md:text-7xl font-bold tracking-tight">
 				Built for self-taught devs who want to prove — to themselves — that
 				they're growing
 			</motion.h1>

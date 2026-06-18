@@ -36,7 +36,7 @@ const features = [
 function Features() {
 	return (
 		<section id="features" className="grid gap-8 mt-20 max-w-4xl mx-auto">
-			<h2 className="text-4xl md:text-5xl tracking-tight">What Stride does</h2>
+			<h2 className="text-2xl sm:text-4xl md:text-5xl tracking-tight">What Stride does</h2>
 
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 				{features.map((item, i) => (

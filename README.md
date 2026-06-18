@@ -1,73 +1,64 @@
-# React + TypeScript + Vite
+# Stride
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Built for self-taught devs who want to prove — to themselves — that they're growing.
 
-Currently, two official plugins are available:
+Track what you learn, what you build, and how far you've come — so your progress is impossible to ignore.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**[Try Stride →](https://stridedev.dev)**
 
-## React Compiler
+![Stride dashboard](./public/screenshot-dashboard.jpg)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the ESLint configuration
+## About
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Most people learning web development feel like they don't belong. Or get overwhelmed by how much there is to learn. I've been there.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Without a computer science degree, starting from scratch can leave you feeling lost halfway through your journey. Stride was built for that exact problem.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+There are plenty of skill trackers out there — but none aimed at web developers, and especially not at the ones constantly fighting impostor syndrome. Stride helps self-taught web devs track their journey, see their growth, and build confidence by recording projects and rating the concepts they used along the way.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Features
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- **Concepts** — Add, edit, and delete concepts with an initial confidence rating (Beginner → Mastered)
+- **Notes per concept** — Capture insights as you learn
+- **Projects** — Add, edit, delete, and change project status (Not Started → In Progress → Completed)
+- **Lessons learnt per project** - Capture lessons learnt on completion of a project
+- **Inline concept creation** — Create concepts on the fly while adding a project, or in bulk from the concepts overview page
+- **Confidence dashboard** with:
+  - Projects completed and concepts mastered at a glance
+  - Rating chart of all concepts
+  - Recently added concepts table
+  - Recently added projects
+- **Rating history chart per concept** — See how your confidence in each concept has grown over time
+- **Authentication** — Sign up, log in, password reset, email verification
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Tech Stack
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+**Frontend Foundation**
+
+- React (Vite)
+- TypeScript
+- Tailwind CSS
+
+**State & Data**
+
+- TanStack Query
+- React Hook Form
+- Zod
+- Axios
+
+**Routing & UX**
+
+- React Router
+- Framer Motion
+- Recharts
+- react-loader-spinner
+- react-hot-toast
+- lucide-react
+
+**Monitoring**
+
+- Sentry
+
+
+The backend API lives in a [separate repo](https://github.com/alsheha88/stride-backend).

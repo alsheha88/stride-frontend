@@ -8,7 +8,7 @@ const ProtectedLayout = () => {
 	return (
 		<ProtectedRoute>
 			<NavLink to="/" className="sm:block hidden px-4 sm:px-8 py-4">
-				<img src={logo} alt="Stride" className="w-20 h-8" />
+				<img src={logo} alt="Stride"  className="w-20 h-8" />
 			</NavLink>
 			<NavBar />
 			<div className="pt-16">

@@ -11,7 +11,7 @@ const NavBar = () => {
               className={({ isActive }) =>
                 `px-3 md:px-4 py-2 rounded-full transition-colors block ${
                   isActive
-                    ? "bg-primary text-headline"
+                    ? "bg-primary text-background"
                     : "text-muted hover:bg-surface-hover"
                 }`
               }
@@ -25,7 +25,7 @@ const NavBar = () => {
               className={({ isActive }) =>
                 `px-3 md:px-4 py-2 rounded-full transition-colors block ${
                   isActive
-                    ? "bg-primary text-headline"
+                    ? "bg-primary text-background"
                     : "text-muted hover:bg-background hover:text-headline"
                 }`
               }
@@ -39,7 +39,7 @@ const NavBar = () => {
               className={({ isActive }) =>
                 `px-3 md:px-4 py-2 rounded-full transition-colors block ${
                   isActive
-                    ? "bg-primary text-headline"
+                    ? "bg-primary text-background"
                     : "text-muted hover:bg-background hover:text-headline"
                 }`
               }
@@ -53,7 +53,7 @@ const NavBar = () => {
               className={({ isActive }) =>
                 `px-3 md:px-4 py-2 rounded-full transition-colors block ${
                   isActive
-                    ? "bg-primary text-headline"
+                    ? "bg-primary text-background"
                     : "text-muted hover:bg-background hover:text-headline"
                 }`
               }

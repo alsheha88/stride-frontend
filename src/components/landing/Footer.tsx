@@ -9,7 +9,7 @@ function Footer() {
 				<p className="text-muted sm:text-base text-sm">© 2026 Stride. Built by Abdulaziz</p>
 				<a
 					href="https://github.com/alsheha88"
-					className="flex items-center justify-center">
+					className="flex items-center justify-center" aria-label="GitHub profile">
 						<FaGithub className="text-3xl text-paragraph" />
 				</a>
 			</div>

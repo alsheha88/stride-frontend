@@ -11,11 +11,19 @@ import DashboardEmptyState from "../components/DashboardEmptyState";
 import { getApiErrorMessage } from "../lib/api";
 import { motion } from "motion/react";
 
-
 const statusMap = {
-  NOT_STARTED: { label: "Not Started", style: "text-muted py-1 px-2 bg-muted/33 border border-muted" },
-  IN_PROGRESS: { label: "In Progress", style: "text-primary py-1 px-2 bg-primary/33 border border-primary" },
-  COMPLETED: { label: "Completed", style: "text-success py-1 px-2 bg-success/33 border border-success" },
+	NOT_STARTED: {
+		label: "Not Started",
+		style: "text-muted py-1 px-2 bg-muted/33 border border-muted",
+	},
+	IN_PROGRESS: {
+		label: "In Progress",
+		style: "text-primary py-1 px-2 bg-primary/33 border border-primary",
+	},
+	COMPLETED: {
+		label: "Completed",
+		style: "text-success py-1 px-2 bg-success/33 border border-success",
+	},
 } as const;
 
 const tierColors = [
@@ -25,8 +33,6 @@ const tierColors = [
 	{ filled: "bg-success", rating: "Strong" },
 	{ filled: "bg-tertiary", rating: "Mastered" },
 ];
-
-
 
 const DashboardPage = () => {
 	const { data, isError, isLoading, error } = useGetDashboard();
@@ -135,6 +141,7 @@ const DashboardPage = () => {
 							<RatingDots rating={concept.ratings[0]?.rating ?? 0} />
 							<NavLink
 								to={`/concepts/${concept.id}`}
+								aria-label={`View ${concept.name}`}
 								className="place-self-center">
 								<ArrowBigRight
 									fill="#fffffe"

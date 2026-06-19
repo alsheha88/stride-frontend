@@ -234,6 +234,7 @@ const ConceptDetailPage = () => {
 								</p>
 								<NavLink
 									to={`/projects/${project.projectId}`}
+									aria-label={`View ${project.project.name}`}
 									className="place-self-center">
 									<ArrowBigRight
 										fill="#fffffe"
@@ -265,18 +266,20 @@ const ConceptDetailPage = () => {
 							{concept.notes.map((note) => (
 								<li
 									key={note.id}
-									className="leading-loose flex items-center justify-between">
-									{note.content}
-									<div className="flex items-center gap-2">
+									className="leading-loose flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 group">
+									<span className="flex-1">{note.content}</span>
+									<div className="flex items-center gap-1 self-end sm:self-start opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
 										<button
 											type="button"
-											className="cursor-pointer"
+											className="cursor-pointer p-3 -m-3"
+											aria-label="Edit note"
 											onClick={() => handleEditClick(note)}>
 											<Edit2 size={16} className="hover:stroke-primary-hover" />
 										</button>
 										<button
 											type="button"
-											className="cursor-pointer"
+											className="cursor-pointer p-3 -m-3"
+											aria-label="Delete note"
 											onClick={() =>
 												deleteConceptNote({ id: concept.id, noteId: note.id })
 											}>

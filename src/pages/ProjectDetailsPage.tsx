@@ -197,6 +197,7 @@ function ProjectDetailsPage() {
 									<RatingDots rating={ratingToShow ?? 0} />
 									<NavLink
 										to={`/concepts/${link.concept.id}`}
+										aria-label={`View ${link.concept.name}`}
 										className="place-self-center">
 										<ArrowBigRight
 											fill="#fffffe"
@@ -223,6 +224,7 @@ function ProjectDetailsPage() {
 								<button
 									type="button"
 									className="cursor-pointer"
+									aria-label="Edit lessons learned"
 									onClick={() => setShowLessonsForm(true)}>
 									<Edit2
 										size={20}

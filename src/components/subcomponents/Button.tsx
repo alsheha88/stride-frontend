@@ -20,7 +20,7 @@ const Button = ({
 }: ButtonProps) => {
   function buttonStyle(variant: string) {
     if (variant === "primary") {
-      return "bg-primary text-headline not-disabled:hover:bg-primary-hover";
+      return "bg-primary text-background not-disabled:hover:bg-primary-hover";
     }
     if (variant === "secondary") {
       return "text-paragraph border border-border not-disabled:hover:bg-surface";

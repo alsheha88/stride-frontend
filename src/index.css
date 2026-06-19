@@ -41,15 +41,20 @@
 	/* Brand & actions */
 	--color-primary: hsl(32, 100%, 51%);
 	--color-primary-hover: hsl(32, 96%, 46%);
-
+	--color-primary-active: hsl(32, 96%, 40%);
+	
 	/* Accents */
 	--color-secondary: hsl(7, 87%, 62%);
+	--color-secondary-active: hsl(7, 83%, 50%);
 	--color-tertiary: hsl(335, 78%, 55%);
+	--color-tertiary-active: hsl(335, 74%, 43%);
 
 	/* Status */
 	--color-success: hsl(157, 62%, 44%);
+	--color-success-active: hsl(157, 64%, 32%);
 	--color-danger: hsl(354, 70%, 50%);
 	--color-danger-hover: hsl(354, 70%, 42%);
+	--color-danger-active: hsl(354, 72%, 36%);
 	--color-warning: hsl(45, 100%, 51%);
 
 	/* Font family */

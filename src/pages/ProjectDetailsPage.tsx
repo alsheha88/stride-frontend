@@ -50,12 +50,13 @@ function ProjectDetailsPage() {
 		error: editLessonError,
 	} = useEditProjectLessons();
 
-	const { handleSubmit, register, reset } = useForm<UpdateProjectLessonsData>({
+	const { handleSubmit, register } = useForm<UpdateProjectLessonsData>({
 		resolver: zodResolver(lessonsLearntSchema),
 		defaultValues: {
 			lessonsLearned: data?.data.project.lessonsLearned ?? "",
 		},
 	});
+	console.log(data?.data.project.lessonsLearned)
 
 	const [isEditOpen, setIsEditOpen] = useState(false);
 	const [showLessonsForm, setShowLessonsForm] = useState(false);
@@ -104,7 +105,6 @@ function ProjectDetailsPage() {
 			{ id: project.id, data: lessonsLearned },
 			{
 				onSuccess: () => {
-					reset();
 					setShowLessonsForm(false);
 				},
 			},
@@ -115,7 +115,7 @@ function ProjectDetailsPage() {
 		<main className="min-h-dvh px-3 pt-4 pb-10 max-w-6xl mx-auto">
 			<div className="w-full grid items-start gap-10 border border-border bg-surface/25 rounded-lg px-4 py-8 shadow-lg shadow-black/40 h-full">
 				<div className="flex items-center justify-between">
-					<h3 className="text-paragraph sm:text-2xl text-xl font-semibold">
+					<h3 className="text-paragraph sm:text-3xl text-xl font-semibold">
 						{project.name}
 					</h3>
 					<Button

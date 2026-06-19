@@ -181,7 +181,7 @@ const ConceptDetailPage = () => {
 		<main className="min-h-dvh px-3 md:px-8 pt-4 pb-16 max-w-6xl mx-auto">
 			<div className="w-full grid items-start gap-10 border border-border bg-surface/25 rounded-lg px-4 py-8 shadow-lg shadow-black/40 h-full">
 				<div className="flex items-center justify-between">
-					<h1 className="text-paragraph text-2xl md:text-3xl">
+					<h1 className="text-paragraph text-xl md:text-3xl">
 						{concept.name}
 					</h1>
 					<Button

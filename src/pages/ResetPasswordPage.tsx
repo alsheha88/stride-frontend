@@ -54,7 +54,7 @@ const ResetPasswordPage = () => {
 				<h1 className="text-2xl md:text-3xl text-paragraph">Reset Password</h1>
 
 				<form
-					className="grid gap-6 w-full p-8 bg-surface border border-border rounded-lg"
+					className="grid gap-6 w-full p-8 bg-surface/25 border border-border rounded-lg"
 					onSubmit={handleSubmit(onSubmit)}>
 
 					<div className="flex flex-col gap-2">

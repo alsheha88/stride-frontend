@@ -29,7 +29,7 @@ const LoginPage = () => {
 				</p>
 
 				<form
-					className="grid gap-6 w-full p-8 bg-surface border border-border rounded-lg"
+					className="grid gap-6 w-full p-8 bg-surface/25 border border-border rounded-lg"
 					onSubmit={handleSubmit(onSubmit)}>
 					<div className="flex flex-col gap-2">
 						<Input type="text" text="Email" {...register("email")} />

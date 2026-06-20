@@ -1,32 +1,21 @@
 @import "tailwindcss";
 
-:root {
-	/* Surfaces */
-	--color-background: #0f0e17;
-	--color-surface: #1a1925;
-	--color-border: #2a2935;
-
-	/* Text */
-	--color-headline: #fffffe;
-	--color-paragraph: #a7a9be;
-	--color-muted: #6b6a78;
-
-	/* Brand & actions */
-	--color-primary: #ff8906;
-	--color-primary-hover: #e67a05;
-
-	/* Accents */
-	--color-secondary: #f25f4c;
-	--color-tertiary: #e53170;
-
-	/* Status */
-	--color-success: #2cb67d;
-	--color-danger: #d92638;
-	--color-danger-hover: hsl(354, 70%, 42%);
-	--color-warning: #ffc107;
-
-	/* Font Weight */
+@font-face {
+  font-family: 'Elms Sans';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/ElmsSans-VariableFont_wght.woff2') format('woff2-variations');
 }
+
+@font-face {
+  font-family: 'Elms Sans';
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/ElmsSans-Italic-VariableFont_wght.woff2') format('woff2-variations');
+}
+
 @theme {
 	/* Surfaces */
 	--color-background: hsl(248, 26%, 7%);

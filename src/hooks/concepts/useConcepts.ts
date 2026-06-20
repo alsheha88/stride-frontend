@@ -47,18 +47,45 @@ export const useAddConcept = () => {
 };
 
 export const useAddConceptNote = () => {
-	const queryClient = useQueryClient();
-
-	return useMutation({
-		mutationFn: addConceptNote,
-		onSuccess: (_data, variables) => {
-			queryClient.invalidateQueries({ queryKey: ["concept", variables.id] });
-			toast.success("Note added");
-		},
-		onError: (error) => {
-			toast.error(getApiErrorMessage(error));
-		},
-	});
+  const queryClient = useQueryClient();
+  
+  return useMutation({
+    mutationFn: addConceptNote,
+    onMutate: async ({ id, data }) => {
+      // Cancel outgoing queries
+      await queryClient.cancelQueries({ queryKey: ['concept', id] });
+      
+      // Snapshot previous value
+      const previous = queryClient.getQueryData(['concept', id]);
+      
+      // Optimistically update
+      queryClient.setQueryData(['concept', id], (old: any) => ({
+        ...old,
+        data: {
+          ...old.data,
+          concept: {
+            ...old.data.concept,
+            notes: [
+              ...old.data.concept.notes,
+              { id: 'temp-' + Date.now(), content: data.note, createdAt: new Date() },
+            ],
+          },
+        },
+      }));
+      
+      return { previous };
+    },
+    onError: (_err, vars, context) => {
+      // Rollback on error
+      if (context?.previous) {
+        queryClient.setQueryData(['concept', vars.id], context.previous);
+      }
+    },
+    onSettled: (_data, _error, vars) => {
+      // Always refetch to get real data
+      queryClient.invalidateQueries({ queryKey: ['concept', vars.id] });
+    },
+  });
 };
 
 export const useEditConcept = () => {

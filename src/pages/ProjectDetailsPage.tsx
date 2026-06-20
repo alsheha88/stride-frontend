@@ -50,13 +50,9 @@ function ProjectDetailsPage() {
 		error: editLessonError,
 	} = useEditProjectLessons();
 
-	const { handleSubmit, register } = useForm<UpdateProjectLessonsData>({
+	const { handleSubmit, register, reset } = useForm<UpdateProjectLessonsData>({
 		resolver: zodResolver(lessonsLearntSchema),
-		defaultValues: {
-			lessonsLearned: data?.data.project.lessonsLearned ?? "",
-		},
 	});
-	console.log(data?.data.project.lessonsLearned)
 
 	const [isEditOpen, setIsEditOpen] = useState(false);
 	const [showLessonsForm, setShowLessonsForm] = useState(false);
@@ -95,7 +91,12 @@ function ProjectDetailsPage() {
 	};
 
 	const handleCancel = () => {
+		reset();
 		setShowLessonsForm(false);
+	};
+	const handleEditClick = () => {
+		reset({ lessonsLearned: project.lessonsLearned ?? "" });
+		setShowLessonsForm(true);
 	};
 
 	const onSubmit: SubmitHandler<UpdateProjectLessonsData> = (
@@ -225,7 +226,7 @@ function ProjectDetailsPage() {
 									type="button"
 									className="cursor-pointer"
 									aria-label="Edit lessons learned"
-									onClick={() => setShowLessonsForm(true)}>
+									onClick={handleEditClick}>
 									<Edit2
 										size={20}
 										className="hover:stroke-primary-hover stroke-paragraph"
